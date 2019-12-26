@@ -81,6 +81,7 @@ class Libguestfs < Formula
   depends_on "ocaml" => :build
   depends_on "ocaml-findlib" => :build
   depends_on "pkg-config" => :build
+  depends_on "gnu-getopt" => :build
   depends_on "augeas"
   depends_on "cdrtools"
   depends_on "coreutils"
@@ -93,6 +94,8 @@ class Libguestfs < Formula
   depends_on "readline"
   depends_on "xz"
   depends_on "yajl"
+  depends_on "gettext"
+  depends_on "libmagic"
   depends_on :osxfuse
 
   # Bindings & tools
@@ -141,6 +144,8 @@ class Libguestfs < Formula
       ENV.prepend_path "PKG_CONFIG_PATH", "/usr/local/opt/#{ext}/lib/pkgconfig"
     end
 
+    ENV.prepend_path "PATH", "/usr/local/opt/gnu-getopt/bin"
+
     args = [
       "--disable-dependency-tracking",
       "--disable-silent-rules",
@@ -149,7 +154,7 @@ class Libguestfs < Formula
       "--disable-probes",
       "--disable-appliance",
       "--disable-daemon",
-      "--disable-ocaml",
+      "--enable-ocaml",
       "--disable-lua",
       "--disable-haskell",
       "--disable-erlang",
